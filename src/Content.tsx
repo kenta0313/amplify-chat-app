@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface ContentProps {
   userName?: string;
+  user?:string;
 }
 
 const Content = (props: ContentProps) => {
@@ -119,7 +120,7 @@ const Content = (props: ContentProps) => {
       postList.push(
         <ListItem key={post.id} className={classes.otherMessage}>
           <Chip label={post.message}></Chip>
-            <p>{props.userName}</p>
+            <p>{post.user}</p>
         </ListItem>
       );
     }
