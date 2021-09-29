@@ -9,6 +9,7 @@ export const onCreatePost = /* GraphQL */ `
       message
       owner
       user
+      create
       createdAt
       updatedAt
     }
@@ -21,6 +22,7 @@ export const onUpdatePost = /* GraphQL */ `
       message
       owner
       user
+      create
       createdAt
       updatedAt
     }
@@ -33,6 +35,7 @@ export const onDeletePost = /* GraphQL */ `
       message
       owner
       user
+      create
       createdAt
       updatedAt
     }

@@ -9,6 +9,7 @@ export const getPost = /* GraphQL */ `
       message
       owner
       user
+      create
       createdAt
       updatedAt
     }
@@ -26,6 +27,7 @@ export const listPosts = /* GraphQL */ `
         message
         owner
         user
+        create
         createdAt
         updatedAt
       }
@@ -55,6 +57,7 @@ export const listPostsSortedByCreatedAt = /* GraphQL */ `
         message
         owner
         user
+        create
         createdAt
         updatedAt
       }

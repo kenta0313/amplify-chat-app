@@ -6,6 +6,7 @@ export interface PostState {
   message: string;
   owner: string;
   user: string;
+  create: string;
   createdAt: string;
 }
 
@@ -14,6 +15,7 @@ const defaultValue: PostState = {
   message: "",
   owner: "",
   user: "",
+  create: "",
   createdAt: "",
 };
 

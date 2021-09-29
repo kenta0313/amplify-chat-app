@@ -9,5 +9,6 @@ type Post
   message: String!
   owner: String
   user: String
+  create: String!
   createdAt: AWSDateTime
 }

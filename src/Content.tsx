@@ -52,7 +52,7 @@ const Content = (props: ContentProps) => {
   const postPost = async () => {
     const post = (await API.graphql(
       graphqlOperation(createPost, {
-        input: { message: message, owner: "chat", user: props.userName },
+        input: { message: message, owner: "chat", user: props.userName, create: "sample" },
       })
     )) as GraphQLResult<CreatePostMutation>;
     const postData = post.data?.createPost as PostState;
@@ -97,6 +97,7 @@ const Content = (props: ContentProps) => {
       postList.push(
         <ListItem key={post.id} className={classes.myMessage}>
           <Chip label={post.message}></Chip>
+          <p>{post.create}</p>
         </ListItem>
       );
     } else {
