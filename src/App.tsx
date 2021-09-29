@@ -7,6 +7,7 @@ import {
   CognitoUserInterface,
 } from "@aws-amplify/ui-components";
 import awsconfig from "./aws-exports";
+import Content from "./Content";
 import { RecoilRoot } from "recoil";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -67,6 +68,7 @@ const App = () => {
             </div>
           </Toolbar>
         </AppBar>
+        <Content userName={user.username} />
       </RecoilRoot>
     </div>
   ) : (
