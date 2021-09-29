@@ -4,7 +4,7 @@ import { postListState, messageState, PostState } from "./recoil/ChatState";
 import { API, graphqlOperation } from "aws-amplify";
 import { GraphQLResult } from "@aws-amplify/api";
 import { listPostsSortedByCreatedAt } from "./graphql/queries";
-import { createPost } from "./graphql/mutations";
+import { createPost, deletePost } from "./graphql/mutations";
 import { onCreatePost } from "./graphql/subscriptions";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -13,7 +13,7 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { CreatePostMutation, ListPostsSortedByCreatedAtQuery } from "./API";
+import { CreatePostMutation, DeletePostMutation, ListPostsSortedByCreatedAtQuery } from "./API";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -60,6 +60,20 @@ const Content = (props: ContentProps) => {
     setMessage("");
   };
 
+  const deletedPost = async (id: string) => {
+      const input = { id }
+      const post = (await API.graphql(
+          graphqlOperation(deletePost, {
+              input
+          })
+      )) as GraphQLResult<DeletePostMutation>;
+      const postData = post?.data?.deletePost?.id;
+      const updatedTodo = posts.filter(post => post.id !== postData);
+      setPosts(updatedTodo);
+
+  }
+
+ 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setMessage(event.target.value);
   };
@@ -97,13 +111,15 @@ const Content = (props: ContentProps) => {
       postList.push(
         <ListItem key={post.id} className={classes.myMessage}>
           <Chip label={post.message}></Chip>
-          <p>{post.create}</p>
+            <p>{props.userName}</p>
+            <button onClick={() => deletedPost(post.id)}>×</button>
         </ListItem>
       );
     } else {
       postList.push(
         <ListItem key={post.id} className={classes.otherMessage}>
           <Chip label={post.message}></Chip>
+            <p>{props.userName}</p>
         </ListItem>
       );
     }
@@ -118,7 +134,6 @@ const Content = (props: ContentProps) => {
         </Button>
       </div>
       <List>{postList}</List>
-      <p>{props.userName}</p>
     </Container>
   );
 };
