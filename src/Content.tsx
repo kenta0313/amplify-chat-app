@@ -14,7 +14,6 @@ import TextField from "@material-ui/core/TextField";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { CreatePostMutation, ListPostsSortedByCreatedAtQuery } from "./API";
-import { userInfo } from "os";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
