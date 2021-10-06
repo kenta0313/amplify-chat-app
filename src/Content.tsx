@@ -71,7 +71,6 @@ const Content = (props: ContentProps) => {
       const postData = post?.data?.deletePost?.id;
       const updatedTodo = posts.filter(post => post.id !== postData);
       setPosts(updatedTodo);
-
   }
 
  
